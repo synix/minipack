@@ -87,6 +87,13 @@ function createAsset(filename) {
     presets: ['env'],
   });
 
+  const dirname = path.dirname(filename);
+  const basename = path.basename(filename);
+
+  // Write the transpiled code to a new file. This is not necessary for the
+  // bundling process but it's useful for debugging.
+  fs.writeFileSync(`${dirname}/transpiled-${basename}`, code);
+
   // Return all information about this module.
   return {
     id,
@@ -246,4 +253,8 @@ function bundle(graph) {
 const graph = createGraph('./example/entry.js');
 const result = bundle(graph);
 
-console.log(result);
+// console.log(result);
+
+// Write the result to a file called `/dist/bundle.js`. This file is our bundle
+// that we can run in the browser.
+fs.writeFileSync('./example/bundle.js', result);

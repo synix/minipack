@@ -6,3 +6,6 @@ yarn-error.log*
 yarn.lock
 package-lock.json
 .vscode
+# Ignore the transpiled files and bundle file
+example/transpiled-*.js
+example/bundle.js
